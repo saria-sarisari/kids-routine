@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>KidsTimer</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>こどもとけい</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', 'Hiragino Maru Gothic Pro', 'BIZ UDGothic', 'Yu Gothic', sans-serif;
+  background: #FEF8F0;
+  min-height: 100vh;
+  padding: 16px;
+}
+
+.app-title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 900;
+  color: #3D2A42;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+/* ======= Clock Card ======= */
+.clock-card {
+  background: white;
+  border-radius: 28px;
+  padding: 20px 20px 18px;
+  box-shadow: 0 2px 18px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+canvas#clock { display: block; }
+
+.digital-time {
+  font-size: 38px;
+  font-weight: 900;
+  color: #3D2A42;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+}
+
+.now-badge {
+  border-radius: 18px;
+  padding: 10px 22px;
+  text-align: center;
+  width: 100%;
+  transition: background 0.5s;
+  background: #F3EDF8;
+}
+
+.now-badge .now-name {
+  font-size: 21px;
+  font-weight: 900;
+  color: #9E8EA0;
+  transition: color 0.4s;
+}
+
+.now-badge .now-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #B0A0B8;
+  margin-top: 2px;
+}
+
+/* ======= Right Panel ======= */
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.card {
+  background: white;
+  border-radius: 24px;
+  padding: 18px 20px;
+  box-shadow: 0 2px 18px rgba(0,0,0,0.07);
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 900;
+  color: #3D2A42;
+  margin-bottom: 14px;
+}
+
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  color: #A090AA;
+  margin-bottom: 5px;
+  letter-spacing: 0.03em;
+}
+
+.form-field { margin-bottom: 12px; }
+
+.form-input {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 9px 13px;
+  border: 2px solid #EDE3F2;
+  border-radius: 13px;
+  width: 100%;
+  outline: none;
+  color: #3D2A42;
+  background: white;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+
+.form-input:focus { border-color: #C08AD0; }
+.form-input::placeholder { color: #CEC0D8; }
+
+.time-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.add-btn {
+  width: 100%;
+  padding: 14px;
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 900;
+  color: white;
+  background: #FF6B9D;
+  border: none;
+  border-radius: 18px;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  margin-top: 2px;
+  transition: transform 0.15s, background 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 14px rgba(255,107,157,0.35);
+}
+
+.add-btn:hover  { background: #FF4F8B; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(255,107,157,0.4); }
+.add-btn:active { transform: scale(0.97); box-shadow: none; }
+
+@keyframes pop {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.1); }
+  65%  { transform: scale(0.94); }
+  100% { transform: scale(1); }
+}
+
+.add-btn.popping { animation: pop 0.32s ease; }
+
+/* ======= Activity List ======= */
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.clear-btn {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: #B8A0C0;
+  background: none;
+  border: 2px solid #EDE3F2;
+  border-radius: 10px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.clear-btn:hover { border-color: #C080D8; color: #9050A0; }
+
+.activity-list { display: flex; flex-direction: column; gap: 8px; }
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  border-radius: 15px;
+  transition: box-shadow 0.35s;
+}
+
+.activity-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.activity-name {
+  font-size: 15px;
+  font-weight: 800;
+  flex: 1;
+}
+
+.activity-time-text {
+  font-size: 13px;
+  font-weight: 700;
+  opacity: 0.65;
+  white-space: nowrap;
+}
+
+.del-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  opacity: 0.25;
+  transition: opacity 0.2s;
+  font-family: inherit;
+  padding: 4px 6px;
+  border-radius: 8px;
+}
+
+.del-btn:hover { opacity: 0.75; background: rgba(0,0,0,0.05); }
+
+.empty-msg {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #C0B0C8;
+  padding: 18px 0;
+  line-height: 1.7;
+}
+
+/* ======= Responsive ======= */
+@media (max-width: 620px) {
+  .app { grid-template-columns: 1fr; }
+  .clock-card { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<h1 class="app-title">⏰ こども とけい</h1>
+
+<div class="app">
+
+  <div class="clock-card">
+    <canvas id="clock" width="340" height="340"></canvas>
+    <div class="digital-time" id="digitalTime">00:00:00</div>
+    <div class="now-badge" id="nowBadge">
+      <div class="now-name" id="nowName">じゆうじかん</div>
+      <div class="now-label" id="nowLabel">のじかんだよ</div>
+    </div>
+  </div>
+
+  <div class="right-panel">
+
+    <div class="card">
+      <div class="card-title">✏️ やることをかこう</div>
+
+      <div class="form-field">
+        <label class="form-label">なにをする？</label>
+        <input type="text" class="form-input" id="actName" placeholder="あさごはん" />
+      </div>
+
+      <div class="time-row">
+        <div class="form-field">
+          <label class="form-label">はじまり</label>
+          <input type="time" class="form-input" id="startTime" value="07:00" />
+        </div>
+        <div class="form-field">
+          <label class="form-label">おわり</label>
+          <input type="time" class="form-input" id="endTime" value="07:30" />
+        </div>
+      </div>
+
+      <button class="add-btn" id="addBtn" onclick="addActivity()">
+        🌟 ついか！
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="list-header">
+        <div class="card-title" style="margin-bottom:0;">📋 きょうのよてい</div>
+        <button class="clear-btn" onclick="clearAll()">ぜんぶけす</button>
+      </div>
+      <div class="activity-list" id="activityList">
+        <div class="empty-msg">まだなにもないよ！<br>やることをついかしてね ✨</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const COLORS = [
+  { fill: '#FF9999', sector: 'rgba(255,153,153,0.45)', bg: '#FFF0F0', text: '#7A1A1A' },
+  { fill: '#FFD166', sector: 'rgba(255,209,102,0.45)', bg: '#FFFAE0', text: '#5A3800' },
+  { fill: '#7FCC90', sector: 'rgba(127,204,144,0.45)', bg: '#EDFFF1', text: '#0F4D20' },
+  { fill: '#74B9E8', sector: 'rgba(116,185,232,0.45)', bg: '#E8F5FF', text: '#0A3870' },
+  { fill: '#FFB077', sector: 'rgba(255,176,119,0.45)', bg: '#FFF3E8', text: '#5A2800' },
+  { fill: '#C99FE0', sector: 'rgba(201,159,224,0.45)', bg: '#FAF0FF', text: '#4A0070' },
+  { fill: '#6DC9C0', sector: 'rgba(109,201,192,0.45)', bg: '#E0FFF7', text: '#00503A' },
+  { fill: '#F0A0C0', sector: 'rgba(240,160,192,0.45)', bg: '#FFF0F7', text: '#5A0030' },
+];
+
+let activities = [];
+let colorIdx = 0;
+
+function parseTime(str) {
+  const [h, m] = str.split(':').map(Number);
+  return h * 60 + m;
+}
+
+/* Angle based on minute-hand position (0–60 min cycle) */
+function minHandAngle(totalMins) {
+  const m = ((totalMins % 60) + 60) % 60;
+  return (m / 60) * 2 * Math.PI - Math.PI / 2;
+}
+
+function drawPieSector(sa, ea, color, full) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(CX, CY);
+  if (full) {
+    ctx.arc(CX, CY, R - 3, 0, 2 * Math.PI);
+  } else {
+    ctx.arc(CX, CY, R - 3, sa, ea);
+  }
+  ctx.closePath();
+  ctx.fillStyle = color;
+  ctx.fill();
+  ctx.restore();
+}
+
+function addActivity() {
+  const name = document.getElementById('actName').value.trim();
+  const start = document.getElementById('startTime').value;
+  const end   = document.getElementById('endTime').value;
+  if (!name)        { showAlert('なにをするか かいてね！'); return; }
+  if (!start || !end) { showAlert('じかんを えらんでね！'); return; }
+  const sM = parseTime(start), eM = parseTime(end);
+  if (eM <= sM)     { showAlert('おわりは はじまりより あとにしてね！'); return; }
+
+  const color = COLORS[colorIdx % COLORS.length];
+  colorIdx++;
+  activities.push({ name, start, end, sM, eM, color });
+  activities.sort((a, b) => a.sM - b.sM);
+  renderList();
+  document.getElementById('actName').value = '';
+  const btn = document.getElementById('addBtn');
+  btn.classList.add('popping');
+  setTimeout(() => btn.classList.remove('popping'), 320);
+}
+
+function deleteActivity(i) {
+  activities.splice(i, 1);
+  renderList();
+}
+
+function clearAll() {
+  if (!activities.length) return;
+  if (confirm('ぜんぶけしますか？')) { activities = []; colorIdx = 0; renderList(); }
+}
+
+function renderList() {
+  const list = document.getElementById('activityList');
+  if (!activities.length) {
+    list.innerHTML = '<div class="empty-msg">まだなにもないよ！<br>やることをついかしてね ✨</div>';
+    return;
+  }
+  list.innerHTML = activities.map((a, i) => `
+    <div class="activity-item" id="aitem-${i}" style="background:${a.color.bg}; color:${a.color.text};">
+      <div class="activity-dot" style="background:${a.color.fill};"></div>
+      <span class="activity-name">${escHtml(a.name)}</span>
+      <span class="activity-time-text">${a.start}〜${a.end}</span>
+      <button class="del-btn" onclick="deleteActivity(${i})" style="color:${a.color.text};">✕</button>
+    </div>
+  `).join('');
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function showAlert(msg) {
+  alert(msg);
+}
+
+/* ====== Canvas Clock ====== */
+const canvas = document.getElementById('clock');
+const ctx    = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+const CX = W / 2, CY = H / 2;
+const R = 128;
+let prevSecond = -1;
+
+function drawHand(angle, len, width, color) {
+  const tail = len * 0.16;
+  ctx.save();
+  ctx.lineCap  = 'round';
+  ctx.lineWidth = width;
+  ctx.strokeStyle = color;
+  ctx.beginPath();
+  ctx.moveTo(CX - Math.cos(angle) * tail, CY - Math.sin(angle) * tail);
+  ctx.lineTo(CX + Math.cos(angle) * len,  CY + Math.sin(angle) * len);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawClock() {
+  const now = new Date();
+  const h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
+
+  if (s === prevSecond) return;
+  prevSecond = s;
+
+  ctx.clearRect(0, 0, W, H);
+  const curM = h * 60 + m;
+
+  /* -- Clock face background -- */
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(CX, CY, R, 0, 2 * Math.PI);
+  ctx.fillStyle = '#FFFCF7';
+  ctx.fill();
+  ctx.restore();
+
+  /* -- Colored pie sectors (only future/current activities) -- */
+  activities.forEach(act => {
+    if (curM >= act.eM) return; /* ended → skip */
+    const durationMins = act.eM - act.sM;
+    const sa = minHandAngle(act.sM);
+    const ea = minHandAngle(act.eM);
+    const full = durationMins >= 60;
+    drawPieSector(sa, ea, act.color.sector, full);
+  });
+
+  /* -- Clock face border -- */
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(CX, CY, R, 0, 2 * Math.PI);
+  ctx.strokeStyle = '#EAE0F0';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.restore();
+
+  /* -- Tick marks -- */
+  for (let i = 0; i < 60; i++) {
+    const a   = (i / 60) * 2 * Math.PI - Math.PI / 2;
+    const big = i % 5 === 0;
+    const len = big ? 10 : 5;
+    ctx.beginPath();
+    ctx.moveTo(CX + Math.cos(a) * (R - len), CY + Math.sin(a) * (R - len));
+    ctx.lineTo(CX + Math.cos(a) * (R - 2),   CY + Math.sin(a) * (R - 2));
+    ctx.strokeStyle = big ? '#C4B0CC' : '#DDD5E5';
+    ctx.lineWidth   = big ? 2 : 1;
+    ctx.stroke();
+  }
+
+  /* -- Hour numbers -- */
+  ctx.font = 'bold 15px Nunito, sans-serif';
+  ctx.textAlign    = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle    = '#5A4065';
+  for (let i = 1; i <= 12; i++) {
+    const a = (i / 12) * 2 * Math.PI - Math.PI / 2;
+    ctx.fillText(i, CX + Math.cos(a) * (R - 22), CY + Math.sin(a) * (R - 22));
+  }
+
+  /* -- Hands -- */
+  const hAngle = ((h % 12 + m / 60 + s / 3600) / 12) * 2 * Math.PI - Math.PI / 2;
+  const mAngle = ((m + s / 60) / 60) * 2 * Math.PI - Math.PI / 2;
+  const sAngle = (s / 60) * 2 * Math.PI - Math.PI / 2;
+
+  drawHand(hAngle, R * 0.52, 7,  '#3D2A42');
+  drawHand(mAngle, R * 0.76, 4.5,'#3D2A42');
+  drawHand(sAngle, R * 0.83, 2,  '#FF4F8B');
+
+  /* -- Center cap -- */
+  ctx.beginPath();
+  ctx.arc(CX, CY, 8, 0, 2 * Math.PI);
+  ctx.fillStyle = '#FF4F8B';
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(CX, CY, 4, 0, 2 * Math.PI);
+  ctx.fillStyle = 'white';
+  ctx.fill();
+
+  /* -- Digital time -- */
+  const pad = n => String(n).padStart(2, '0');
+  document.getElementById('digitalTime').textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
+
+  /* -- Now badge & list highlight -- */
+  const curAct = activities.find(a => curM >= a.sM && curM < a.eM);
+  const badge  = document.getElementById('nowBadge');
+  const nameEl = document.getElementById('nowName');
+  const labEl  = document.getElementById('nowLabel');
+
+  if (curAct) {
+    badge.style.background  = curAct.color.bg;
+    nameEl.style.color      = curAct.color.fill;
+    nameEl.textContent      = curAct.name;
+    labEl.style.color       = curAct.color.fill;
+    labEl.textContent       = 'のじかんだよ！🌟';
+  } else {
+    badge.style.background  = '#F3EDF8';
+    nameEl.style.color      = '#9E8EA0';
+    nameEl.textContent      = 'じゆうじかん';
+    labEl.style.color       = '#B0A0B8';
+    labEl.textContent       = 'のじかんだよ';
+  }
+
+  activities.forEach((a, i) => {
+    const el = document.getElementById(`aitem-${i}`);
+    if (!el) return;
+    const isCur = a === curAct;
+    const ended = curM >= a.eM;
+    el.style.boxShadow = isCur ? `0 0 0 3px ${a.color.fill}` : '';
+    el.style.opacity   = ended ? '0.4' : '1';
+  });
+}
+
+drawClock();
+setInterval(drawClock, 250);
+
+/* Enter key disabled — use button only */
+</script>
+
+</body>
+</html>
+    
+  </body>
+  
+</html>
