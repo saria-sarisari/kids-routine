@@ -5,7 +5,7 @@ ASDのある小学校低学年（6〜7歳）を主な対象として、視覚的
 
 ## デモ
 
-> リンクをここに貼る
+> https://saria-sarisari.github.io/kids-routine/
 
 ## 機能
 
