@@ -9,14 +9,14 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
 body {
   font-family: 'Nunito', 'Hiragino Maru Gothic Pro', 'BIZ UDGothic', 'Yu Gothic', sans-serif;
   background: #FEF8F0;
   min-height: 100vh;
   padding: 16px;
 }
-
+ 
 .app-title {
   text-align: center;
   font-size: 26px;
@@ -25,7 +25,7 @@ body {
   letter-spacing: 0.05em;
   margin-bottom: 16px;
 }
-
+ 
 .app {
   max-width: 960px;
   margin: 0 auto;
@@ -34,7 +34,7 @@ body {
   gap: 18px;
   align-items: start;
 }
-
+ 
 /* ======= Clock Card ======= */
 .clock-card {
   background: white;
@@ -46,9 +46,9 @@ body {
   align-items: center;
   gap: 12px;
 }
-
+ 
 canvas#clock { display: block; }
-
+ 
 .digital-time {
   font-size: 38px;
   font-weight: 900;
@@ -56,7 +56,7 @@ canvas#clock { display: block; }
   letter-spacing: 0.08em;
   font-variant-numeric: tabular-nums;
 }
-
+ 
 .now-badge {
   border-radius: 18px;
   padding: 10px 22px;
@@ -65,42 +65,42 @@ canvas#clock { display: block; }
   transition: background 0.5s;
   background: #F3EDF8;
 }
-
+ 
 .now-badge .now-name {
   font-size: 21px;
   font-weight: 900;
   color: #9E8EA0;
   transition: color 0.4s;
 }
-
+ 
 .now-badge .now-label {
   font-size: 13px;
   font-weight: 700;
   color: #B0A0B8;
   margin-top: 2px;
 }
-
+ 
 /* ======= Right Panel ======= */
 .right-panel {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
-
+ 
 .card {
   background: white;
   border-radius: 24px;
   padding: 18px 20px;
   box-shadow: 0 2px 18px rgba(0,0,0,0.07);
 }
-
+ 
 .card-title {
   font-size: 16px;
   font-weight: 900;
   color: #3D2A42;
   margin-bottom: 14px;
 }
-
+ 
 .form-label {
   display: block;
   font-size: 12px;
@@ -109,9 +109,9 @@ canvas#clock { display: block; }
   margin-bottom: 5px;
   letter-spacing: 0.03em;
 }
-
+ 
 .form-field { margin-bottom: 12px; }
-
+ 
 .form-input {
   font-family: inherit;
   font-size: 16px;
@@ -126,16 +126,16 @@ canvas#clock { display: block; }
   transition: border-color 0.2s;
   -webkit-appearance: none;
 }
-
+ 
 .form-input:focus { border-color: #C08AD0; }
 .form-input::placeholder { color: #CEC0D8; }
-
+ 
 .time-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
 }
-
+ 
 .add-btn {
   width: 100%;
   padding: 14px;
@@ -152,19 +152,19 @@ canvas#clock { display: block; }
   transition: transform 0.15s, background 0.15s, box-shadow 0.15s;
   box-shadow: 0 4px 14px rgba(255,107,157,0.35);
 }
-
+ 
 .add-btn:hover  { background: #FF4F8B; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(255,107,157,0.4); }
 .add-btn:active { transform: scale(0.97); box-shadow: none; }
-
+ 
 @keyframes pop {
   0%   { transform: scale(1); }
   35%  { transform: scale(1.1); }
   65%  { transform: scale(0.94); }
   100% { transform: scale(1); }
 }
-
+ 
 .add-btn.popping { animation: pop 0.32s ease; }
-
+ 
 /* ======= Activity List ======= */
 .list-header {
   display: flex;
@@ -172,7 +172,7 @@ canvas#clock { display: block; }
   align-items: center;
   margin-bottom: 14px;
 }
-
+ 
 .clear-btn {
   font-family: inherit;
   font-size: 12px;
@@ -185,11 +185,11 @@ canvas#clock { display: block; }
   cursor: pointer;
   transition: border-color 0.2s, color 0.2s;
 }
-
+ 
 .clear-btn:hover { border-color: #C080D8; color: #9050A0; }
-
+ 
 .activity-list { display: flex; flex-direction: column; gap: 8px; }
-
+ 
 .activity-item {
   display: flex;
   align-items: center;
@@ -198,27 +198,27 @@ canvas#clock { display: block; }
   border-radius: 15px;
   transition: box-shadow 0.35s;
 }
-
+ 
 .activity-dot {
   width: 14px;
   height: 14px;
   border-radius: 50%;
   flex-shrink: 0;
 }
-
+ 
 .activity-name {
   font-size: 15px;
   font-weight: 800;
   flex: 1;
 }
-
+ 
 .activity-time-text {
   font-size: 13px;
   font-weight: 700;
   opacity: 0.65;
   white-space: nowrap;
 }
-
+ 
 .del-btn {
   background: none;
   border: none;
@@ -230,9 +230,9 @@ canvas#clock { display: block; }
   padding: 4px 6px;
   border-radius: 8px;
 }
-
+ 
 .del-btn:hover { opacity: 0.75; background: rgba(0,0,0,0.05); }
-
+ 
 .empty-msg {
   text-align: center;
   font-size: 14px;
@@ -241,7 +241,7 @@ canvas#clock { display: block; }
   padding: 18px 0;
   line-height: 1.7;
 }
-
+ 
 /* ======= Responsive ======= */
 @media (max-width: 620px) {
   .app { grid-template-columns: 1fr; }
@@ -250,11 +250,11 @@ canvas#clock { display: block; }
 </style>
 </head>
 <body>
-
-<h1 class="app-title">⏰ こども とけい</h1>
-
+ 
+<h1 class="app-title">⏰ こどもとけい</h1>
+ 
 <div class="app">
-
+ 
   <div class="clock-card">
     <canvas id="clock" width="340" height="340"></canvas>
     <div class="digital-time" id="digitalTime">00:00:00</div>
@@ -263,17 +263,17 @@ canvas#clock { display: block; }
       <div class="now-label" id="nowLabel">のじかんだよ</div>
     </div>
   </div>
-
+ 
   <div class="right-panel">
-
+ 
     <div class="card">
       <div class="card-title">✏️ やることをかこう</div>
-
+ 
       <div class="form-field">
         <label class="form-label">なにをする？</label>
         <input type="text" class="form-input" id="actName" placeholder="あさごはん" />
       </div>
-
+ 
       <div class="time-row">
         <div class="form-field">
           <label class="form-label">はじまり</label>
@@ -284,12 +284,12 @@ canvas#clock { display: block; }
           <input type="time" class="form-input" id="endTime" value="07:30" />
         </div>
       </div>
-
+ 
       <button class="add-btn" id="addBtn" onclick="addActivity()">
         🌟 ついか！
       </button>
     </div>
-
+ 
     <div class="card">
       <div class="list-header">
         <div class="card-title" style="margin-bottom:0;">📋 きょうのよてい</div>
@@ -299,10 +299,10 @@ canvas#clock { display: block; }
         <div class="empty-msg">まだなにもないよ！<br>やることをついかしてね ✨</div>
       </div>
     </div>
-
+ 
   </div>
 </div>
-
+ 
 <script>
 const COLORS = [
   { fill: '#FF9999', sector: 'rgba(255,153,153,0.45)', bg: '#FFF0F0', text: '#7A1A1A' },
@@ -314,21 +314,21 @@ const COLORS = [
   { fill: '#6DC9C0', sector: 'rgba(109,201,192,0.45)', bg: '#E0FFF7', text: '#00503A' },
   { fill: '#F0A0C0', sector: 'rgba(240,160,192,0.45)', bg: '#FFF0F7', text: '#5A0030' },
 ];
-
+ 
 let activities = [];
 let colorIdx = 0;
-
+ 
 function parseTime(str) {
   const [h, m] = str.split(':').map(Number);
   return h * 60 + m;
 }
-
+ 
 /* Angle based on minute-hand position (0–60 min cycle) */
 function minHandAngle(totalMins) {
   const m = ((totalMins % 60) + 60) % 60;
   return (m / 60) * 2 * Math.PI - Math.PI / 2;
 }
-
+ 
 function drawPieSector(sa, ea, color, full) {
   ctx.save();
   ctx.beginPath();
@@ -343,16 +343,18 @@ function drawPieSector(sa, ea, color, full) {
   ctx.fill();
   ctx.restore();
 }
-
+ 
 function addActivity() {
   const name = document.getElementById('actName').value.trim();
   const start = document.getElementById('startTime').value;
   const end   = document.getElementById('endTime').value;
   if (!name)        { showAlert('なにをするか かいてね！'); return; }
   if (!start || !end) { showAlert('じかんを えらんでね！'); return; }
-  const sM = parseTime(start), eM = parseTime(end);
-  if (eM <= sM)     { showAlert('おわりは はじまりより あとにしてね！'); return; }
-
+  const sM = parseTime(start);
+  let eM = parseTime(end);
+  if (eM === sM) { showAlert('はじまりとおわりが おなじじかんだよ！'); return; }
+  if (eM < sM) eM += 1440;
+ 
   const color = COLORS[colorIdx % COLORS.length];
   colorIdx++;
   activities.push({ name, start, end, sM, eM, color });
@@ -363,17 +365,17 @@ function addActivity() {
   btn.classList.add('popping');
   setTimeout(() => btn.classList.remove('popping'), 320);
 }
-
+ 
 function deleteActivity(i) {
   activities.splice(i, 1);
   renderList();
 }
-
+ 
 function clearAll() {
   if (!activities.length) return;
   if (confirm('ぜんぶけしますか？')) { activities = []; colorIdx = 0; renderList(); }
 }
-
+ 
 function renderList() {
   const list = document.getElementById('activityList');
   if (!activities.length) {
@@ -389,15 +391,15 @@ function renderList() {
     </div>
   `).join('');
 }
-
+ 
 function escHtml(s) {
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
-
+ 
 function showAlert(msg) {
   alert(msg);
 }
-
+ 
 /* ====== Canvas Clock ====== */
 const canvas = document.getElementById('clock');
 const ctx    = canvas.getContext('2d');
@@ -405,7 +407,7 @@ const W = canvas.width, H = canvas.height;
 const CX = W / 2, CY = H / 2;
 const R = 128;
 let prevSecond = -1;
-
+ 
 function drawHand(angle, len, width, color) {
   const tail = len * 0.16;
   ctx.save();
@@ -418,17 +420,17 @@ function drawHand(angle, len, width, color) {
   ctx.stroke();
   ctx.restore();
 }
-
+ 
 function drawClock() {
   const now = new Date();
   const h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
-
+ 
   if (s === prevSecond) return;
   prevSecond = s;
-
+ 
   ctx.clearRect(0, 0, W, H);
   const curM = h * 60 + m;
-
+ 
   /* -- Clock face background -- */
   ctx.save();
   ctx.beginPath();
@@ -436,17 +438,20 @@ function drawClock() {
   ctx.fillStyle = '#FFFCF7';
   ctx.fill();
   ctx.restore();
-
+ 
   /* -- Colored pie sectors (only future/current activities) -- */
+  const isEnded  = (act) => act.eM <= 1440 ? curM >= act.eM : (curM >= act.eM - 1440 && curM < act.sM);
+  const isActive = (act) => act.eM <= 1440 ? (curM >= act.sM && curM < act.eM) : (curM >= act.sM || curM < act.eM - 1440);
+ 
   activities.forEach(act => {
-    if (curM >= act.eM) return; /* ended → skip */
+    if (isEnded(act)) return;
     const durationMins = act.eM - act.sM;
     const sa = minHandAngle(act.sM);
     const ea = minHandAngle(act.eM);
     const full = durationMins >= 60;
     drawPieSector(sa, ea, act.color.sector, full);
   });
-
+ 
   /* -- Clock face border -- */
   ctx.save();
   ctx.beginPath();
@@ -455,7 +460,7 @@ function drawClock() {
   ctx.lineWidth = 2;
   ctx.stroke();
   ctx.restore();
-
+ 
   /* -- Tick marks -- */
   for (let i = 0; i < 60; i++) {
     const a   = (i / 60) * 2 * Math.PI - Math.PI / 2;
@@ -468,7 +473,7 @@ function drawClock() {
     ctx.lineWidth   = big ? 2 : 1;
     ctx.stroke();
   }
-
+ 
   /* -- Hour numbers -- */
   ctx.font = 'bold 15px Nunito, sans-serif';
   ctx.textAlign    = 'center';
@@ -478,16 +483,16 @@ function drawClock() {
     const a = (i / 12) * 2 * Math.PI - Math.PI / 2;
     ctx.fillText(i, CX + Math.cos(a) * (R - 22), CY + Math.sin(a) * (R - 22));
   }
-
+ 
   /* -- Hands -- */
   const hAngle = ((h % 12 + m / 60 + s / 3600) / 12) * 2 * Math.PI - Math.PI / 2;
   const mAngle = ((m + s / 60) / 60) * 2 * Math.PI - Math.PI / 2;
   const sAngle = (s / 60) * 2 * Math.PI - Math.PI / 2;
-
+ 
   drawHand(hAngle, R * 0.52, 7,  '#3D2A42');
   drawHand(mAngle, R * 0.76, 4.5,'#3D2A42');
   drawHand(sAngle, R * 0.83, 2,  '#FF4F8B');
-
+ 
   /* -- Center cap -- */
   ctx.beginPath();
   ctx.arc(CX, CY, 8, 0, 2 * Math.PI);
@@ -497,17 +502,17 @@ function drawClock() {
   ctx.arc(CX, CY, 4, 0, 2 * Math.PI);
   ctx.fillStyle = 'white';
   ctx.fill();
-
+ 
   /* -- Digital time -- */
   const pad = n => String(n).padStart(2, '0');
   document.getElementById('digitalTime').textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
-
+ 
   /* -- Now badge & list highlight -- */
-  const curAct = activities.find(a => curM >= a.sM && curM < a.eM);
+  const curAct = activities.find(a => isActive(a));
   const badge  = document.getElementById('nowBadge');
   const nameEl = document.getElementById('nowName');
   const labEl  = document.getElementById('nowLabel');
-
+ 
   if (curAct) {
     badge.style.background  = curAct.color.bg;
     nameEl.style.color      = curAct.color.fill;
@@ -521,26 +526,23 @@ function drawClock() {
     labEl.style.color       = '#B0A0B8';
     labEl.textContent       = 'のじかんだよ';
   }
-
+ 
   activities.forEach((a, i) => {
     const el = document.getElementById(`aitem-${i}`);
     if (!el) return;
     const isCur = a === curAct;
-    const ended = curM >= a.eM;
+    const ended = isEnded(a);
     el.style.boxShadow = isCur ? `0 0 0 3px ${a.color.fill}` : '';
     el.style.opacity   = ended ? '0.4' : '1';
   });
 }
-
+ 
 drawClock();
 setInterval(drawClock, 250);
-
+ 
 /* Enter key disabled — use button only */
 </script>
-
+ 
 </body>
 </html>
-    
-  </body>
-  
-</html>
+ 
